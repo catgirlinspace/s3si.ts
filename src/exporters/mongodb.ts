@@ -1,6 +1,8 @@
 import { MongoDB } from "../../deps.ts";
-import { Game, GameExporter } from "../types.ts";
+import { AGENT_VERSION, NSOAPP_VERSION, S3SI_VERSION } from "../constant.ts";
+import { CoopHistoryDetail, ExportResult, Game, GameExporter, VsHistoryDetail } from "../types.ts";
 import { parseHistoryDetailId } from "../utils.ts";
+import { FileExporterTypeCommon } from "./file.ts";
 
 export class MongoDBExporter implements GameExporter {
 	name = "mongodb";
@@ -46,5 +48,42 @@ export class MongoDBExporter implements GameExporter {
 		}
 
 		return out;
+	}
+
+	async exportGame(game: Game): Promise<ExportResult> {
+		const uniqueId = this.getGameId(game.detail.id);
+
+		const common = {
+			// this seems like useful data to store...
+			// loosely modeled after FileExporterTypeCommon
+			nsoVersion: NSOAPP_VERSION,
+			agentVersion: AGENT_VERSION,
+			s3siVersion: S3SI_VERSION,
+			exportTime: new Date(),
+		};
+		const body:
+		{
+			data: Game,
+			splatNetData: VsHistoryDetail | CoopHistoryDetail,
+			gameId: string,
+		} & typeof common = {
+			...common,
+			data: game,
+			splatNetData: game.detail,
+			gameId: uniqueId,
+		};
+
+		const isJob = game.type === "CoopInfo";
+
+		const collection = isJob ? this.jobsCollection : this.battlesCollection;
+
+		const result = await collection.insertOne(body);
+
+		const objectId = result.insertedId;
+
+		return {
+			status: "success",
+			url: `https://new.splatoon.catgirlin.space/battle/${objectId.toString()}`,
+		};
 	}
 }
