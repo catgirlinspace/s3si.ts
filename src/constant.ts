@@ -1,12 +1,14 @@
 import type { StatInkPostBody, VsHistoryDetail } from "./types.ts";
 
-export const AGENT_NAME = "s3si.ts";
+export const AGENT_NAME = "splatoon.catgirlin.space / s3si.ts";
+export const AGENT_VERSION = "1.0.0";
 export const S3SI_VERSION = "0.2.9";
+export const COMBINED_VERSION = `${AGENT_VERSION}/${S3SI_VERSION}`;
 export const NSOAPP_VERSION = "2.4.0";
 export const WEB_VIEW_VERSION = "2.0.0-7070f95e";
-export const S3SI_LINK = "https://github.com/spacemeowx2/s3si.ts";
+export const S3SI_LINK = "https://forgejo.catgirlin.space/catgirl/s3si.ts";
 
-export const USERAGENT = `${AGENT_NAME}/${S3SI_VERSION} (${S3SI_LINK})`;
+export const USERAGENT = `${AGENT_NAME}/(${COMBINED_VERSION}) (${S3SI_LINK})`;
 export const DEFAULT_APP_USER_AGENT =
   "Mozilla/5.0 (Linux; Android 11; Pixel 5) " +
   "AppleWebKit/537.36 (KHTML, like Gecko) " +
