@@ -9,6 +9,7 @@ import { FileExporter } from "./exporters/file.ts";
 import { delay, showError } from "./utils.ts";
 import { GameFetcher } from "./GameFetcher.ts";
 import { DEFAULT_ENV, Env } from "./env.ts";
+import { MongoDBExporter } from "./exporters/mongodb.ts";
 
 export type Opts = {
   profilePath: string;
@@ -113,6 +114,25 @@ export class App {
 
     if (exporters.includes("file")) {
       out.push(new FileExporter(state.fileExportPath));
+    }
+
+    if (exporters.includes("mongodb")) {
+      if (!state.mongoDbUri) {
+        const uri = (await this.env.prompts.prompt(
+          "MongoDB URI is not set. Please enter below.",
+        )).trim();
+        if (!uri) {
+          this.env.logger.error("MongoDB URI is required.");
+          Deno.exit(1);
+        }
+        await this.profile.writeState({
+          ...state,
+          mongoDbUri: uri,
+        });
+      }
+      out.push(
+        new MongoDBExporter(this.profile.state.mongoDbUri!),
+      );
     }
 
     return out;
