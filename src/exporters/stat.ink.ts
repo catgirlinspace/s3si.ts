@@ -1,5 +1,6 @@
 import {
   AGENT_NAME,
+  COMBINED_VERSION,
   S3SI_VERSION,
   SPLATNET3_STATINK_MAP,
   USERAGENT,
@@ -456,7 +457,7 @@ export class StatInkExporter implements GameExporter {
       ),
 
       agent: AGENT_NAME,
-      agent_version: S3SI_VERSION,
+      agent_version: COMBINED_VERSION,
       agent_variables: {
         "Upload Mode": this.uploadMode,
       },
