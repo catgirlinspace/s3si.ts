@@ -1,6 +1,6 @@
 import { MongoDB } from "../../deps.ts";
 import { AGENT_VERSION, NSOAPP_VERSION, S3SI_VERSION } from "../constant.ts";
-import { CoopHistoryDetail, ExportResult, Game, GameExporter, VsHistoryDetail } from "../types.ts";
+import { CoopHistoryDetail, ExportResult, Game, GameExporter, Summary, VsHistoryDetail } from "../types.ts";
 import { parseHistoryDetailId } from "../utils.ts";
 import { FileExporterTypeCommon } from "./file.ts";
 
@@ -10,14 +10,16 @@ export class MongoDBExporter implements GameExporter {
 	mongoDb: MongoDB.Db;
 	battlesCollection: MongoDB.Collection;
 	jobsCollection: MongoDB.Collection;
+	summariesCollection: MongoDB.Collection;
 	constructor(private mongoDbUri: string) {
 		this.mongoDbClient = new MongoDB.MongoClient(mongoDbUri);
 		this.mongoDb = this.mongoDbClient.db("splashcat");
 		this.battlesCollection = this.mongoDb.collection("battles");
 		this.jobsCollection = this.mongoDb.collection("jobs");
+		this.summariesCollection = this.mongoDb.collection("summaries");
 	}
 
-	getGameId(id: string) { // very similar to the file exporter
+	static getGameId(id: string) { // very similar to the file exporter
 		const { uid, timestamp } = parseHistoryDetailId(id);
 
 		return `${uid}_${timestamp}Z`;
@@ -32,12 +34,10 @@ export class MongoDBExporter implements GameExporter {
 			// countOldStorage can be removed later eventually when all old documents
 			// are gone from SplatNet 3
 			const countOldStorage = await collection.countDocuments({
-				splatNetData: {
-					id: id,
-				}
+				"splatNetData.id": id,
 			});
 
-			const uniqueId = this.getGameId(id);
+			const uniqueId = MongoDBExporter.getGameId(id);
 			const countNewStorage = await collection.countDocuments({
 				gameId: uniqueId,
 			});
@@ -51,7 +51,7 @@ export class MongoDBExporter implements GameExporter {
 	}
 
 	async exportGame(game: Game): Promise<ExportResult> {
-		const uniqueId = this.getGameId(game.detail.id);
+		const uniqueId = MongoDBExporter.getGameId(game.detail.id);
 
 		const common = {
 			// this seems like useful data to store...
@@ -59,7 +59,7 @@ export class MongoDBExporter implements GameExporter {
 			nsoVersion: NSOAPP_VERSION,
 			agentVersion: AGENT_VERSION,
 			s3siVersion: S3SI_VERSION,
-			exportTime: new Date(),
+			exportDate: new Date(),
 		};
 		const body:
 		{
@@ -84,6 +84,19 @@ export class MongoDBExporter implements GameExporter {
 		return {
 			status: "success",
 			url: `https://new.splatoon.catgirlin.space/battle/${objectId.toString()}`,
+		};
+	}
+
+	async exportSummary(summary: Summary): Promise<ExportResult> {
+		const id = summary.uid;
+
+		await this.summariesCollection.insertOne({
+			summaryId: id,
+			...summary,
+		});
+
+		return {
+			status: "success",
 		};
 	}
 }
