@@ -28,7 +28,7 @@ Options:
     --profile-path <path>, -p    Path to config file (default: ./profile.json)
     --exporter <exporter>, -e    Exporter list to use (default: stat.ink)
                                  Multiple exporters can be separated by commas
-                                 (e.g. "stat.ink,file")
+                                 (e.g. "stat.ink,file,mongodb")
     --no-progress, -n            Disable progress bar
     --monitor, -m                Monitor mode
     --skip-mode <mode>, -s       Skip mode (default: null)
