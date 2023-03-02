@@ -31,18 +31,13 @@ export class MongoDBExporter implements GameExporter {
 		const collection = type === "CoopInfo" ? this.jobsCollection : this.battlesCollection;
 
 		for (const id of list) {
-			// countOldStorage can be removed later eventually when all old documents
-			// are gone from SplatNet 3
-			const countOldStorage = await collection.countDocuments({
-				"splatNetData.id": id,
-			});
 
 			const uniqueId = MongoDBExporter.getGameId(id);
 			const countNewStorage = await collection.countDocuments({
 				gameId: uniqueId,
 			});
 
-			if (countOldStorage === 0 && countNewStorage === 0) {
+			if (countNewStorage === 0) {
 				out.push(id);
 			}
 		}
