@@ -2,7 +2,6 @@ import { MongoDB } from "../../deps.ts";
 import { AGENT_VERSION, NSOAPP_VERSION, S3SI_VERSION } from "../constant.ts";
 import { CoopHistoryDetail, ExportResult, Game, GameExporter, Summary, VsHistoryDetail } from "../types.ts";
 import { parseHistoryDetailId } from "../utils.ts";
-import { FileExporterTypeCommon } from "./file.ts";
 
 export class MongoDBExporter implements GameExporter {
 	name = "mongodb";
@@ -31,7 +30,6 @@ export class MongoDBExporter implements GameExporter {
 		const collection = type === "CoopInfo" ? this.jobsCollection : this.battlesCollection;
 
 		for (const id of list) {
-
 			const uniqueId = MongoDBExporter.getGameId(id);
 			const countNewStorage = await collection.countDocuments({
 				gameId: uniqueId,
