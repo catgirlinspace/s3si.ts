@@ -54,6 +54,12 @@ export class MongoDBExporter implements GameExporter {
 			s3siVersion: S3SI_VERSION,
 			exportDate: new Date(),
 		};
+
+		const splatNetData = {
+			...game.detail,
+			playedTime: new Date(game.detail.playedTime),
+		};
+
 		const body:
 		{
 			data: Game,
@@ -62,7 +68,7 @@ export class MongoDBExporter implements GameExporter {
 		} & typeof common = {
 			...common,
 			data: game,
-			splatNetData: game.detail,
+			splatNetData,
 			gameId: uniqueId,
 		};
 
