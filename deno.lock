@@ -69,7 +69,9 @@
     "https://deno.land/x/ts_essentials@v9.1.2/mod.ts": "ffae461c16d4a1bf24c2179582ab8d5c81ad0df61e4ae2fba51ef5e5bdf90345"
   },
   "npm": {
-    "specifiers": { "mongodb": "mongodb@5.1.0" },
+    "specifiers": {
+      "mongodb": "mongodb@5.1.0"
+    },
     "packages": {
       "@types/node@18.14.2": {
         "integrity": "sha512-1uEQxww3DaghA0RxqHx0O0ppVlo43pJhepY51OxuQIKHpjbnYLA7vcdwioNPzIqmC2u3I/dmylcqjlh0e7AyUA==",
@@ -120,7 +122,9 @@
       },
       "saslprep@1.0.3": {
         "integrity": "sha512-/MY/PEMbk2SuY5sScONwhUDsV2p77Znkb/q3nSVstq/yQzYJOH/Azh29p9oJLsl3LnQwSvZDKagDGBsBwSooag==",
-        "dependencies": { "sparse-bitfield": "sparse-bitfield@3.0.3" }
+        "dependencies": {
+          "sparse-bitfield": "sparse-bitfield@3.0.3"
+        }
       },
       "smart-buffer@4.2.0": {
         "integrity": "sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==",
@@ -135,11 +139,15 @@
       },
       "sparse-bitfield@3.0.3": {
         "integrity": "sha512-kvzhi7vqKTfkh0PZU+2D2PIllw2ymqJKujUcyPMd9Y75Nv4nPbGJZXNhxsgdQab2BmlDct1YnfQCguEvHr7VsQ==",
-        "dependencies": { "memory-pager": "memory-pager@1.5.0" }
+        "dependencies": {
+          "memory-pager": "memory-pager@1.5.0"
+        }
       },
       "tr46@3.0.0": {
         "integrity": "sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==",
-        "dependencies": { "punycode": "punycode@2.3.0" }
+        "dependencies": {
+          "punycode": "punycode@2.3.0"
+        }
       },
       "webidl-conversions@7.0.0": {
         "integrity": "sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==",
