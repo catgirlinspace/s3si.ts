@@ -63,7 +63,7 @@ export class MongoDBExporter implements GameExporter {
 		const body:
 		{
 			data: Game,
-			splatNetData: VsHistoryDetail | CoopHistoryDetail,
+			splatNetData: Omit<(VsHistoryDetail | CoopHistoryDetail), "playedTime"> & { playedTime: Date },
 			gameId: string,
 		} & typeof common = {
 			...common,
