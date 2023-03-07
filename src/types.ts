@@ -1,3 +1,4 @@
+import { splatNet3Types } from "../deps.ts";
 import { RankState } from "./state.ts";
 
 export enum Queries {
@@ -15,6 +16,7 @@ export enum Queries {
   myOutfitCommonDataEquipmentsQuery = "d29cd0c2b5e6bac90dd5b817914832f8",
   HistoryRecordQuery = "32b6771f94083d8f04848109b7300af5",
   ConfigureAnalyticsQuery = "f8ae00773cc412a50dd41a6d9a159ddd",
+  StageRecordQuery = "f08a932d533845dde86e674e03bbb7d3",
 }
 export type VarsMap = {
   [Queries.HomeQuery]: [];
@@ -34,6 +36,7 @@ export type VarsMap = {
   [Queries.myOutfitCommonDataEquipmentsQuery]: [];
   [Queries.HistoryRecordQuery]: [];
   [Queries.ConfigureAnalyticsQuery]: [];
+  [Queries.StageRecordQuery]: [];
 };
 
 export type Image = {
@@ -371,6 +374,9 @@ export type GameExporter = {
   ) => Promise<string[]>;
   exportGame: (game: Game) => Promise<ExportResult>;
   exportSummary?: (summary: Summary) => Promise<ExportResult>;
+  exportStages?: (
+    stages: RespMap[Queries.StageRecordQuery]["stageRecords"]["nodes"],
+  ) => Promise<ExportResult>;
 };
 
 export type BankaraBattleHistories = {
@@ -550,6 +556,7 @@ export type RespMap = {
       xMatchMaxLf: SimpleXRank;
     } | null;
   };
+  [Queries.StageRecordQuery]: splatNet3Types.StageRecordResult;
 };
 export type WeaponWithRatio = {
   weapon: {

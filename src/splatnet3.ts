@@ -257,6 +257,12 @@ export class Splatnet3 {
       CoopHistoryQuery,
     };
   }
+
+  async getStageRecords() {
+    const resp = await this.request(Queries.StageRecordQuery);
+
+    return resp;
+  }
 }
 
 function getIdsFromGroups<T extends { id: string }>(

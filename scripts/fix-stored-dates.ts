@@ -9,17 +9,17 @@ const profile = new Profile({ stateBackend, env });
 await profile.readState();
 
 if (!profile.state.mongoDbUri) {
-	console.error("MongoDB URI not set");
-	Deno.exit(1);
+  console.error("MongoDB URI not set");
+  Deno.exit(1);
 }
 
 const mongoDbClient = new MongoDB.MongoClient(profile.state.mongoDbUri);
 const battlesCollection = mongoDbClient.db("splashcat").collection("battles");
 
 const filter = {
-	"splatNetData.playedTime": {
-		$type: "string"
-	}
+  "splatNetData.playedTime": {
+    $type: "string",
+  },
 };
 
 const cursor = battlesCollection.find(filter);
@@ -29,13 +29,19 @@ const oldDocuments = await battlesCollection.countDocuments(filter);
 console.log(`Found ${oldDocuments} old battles to update...`);
 
 for await (const doc of cursor) {
-	const { splatNetData, _id } = doc;
+  const { splatNetData, _id } = doc;
 
-	await battlesCollection.updateOne({ _id }, { "$set": {
-		"splatNetData.playedTime": new Date(splatNetData.playedTime),
-	}});
+  await battlesCollection.updateOne({ _id }, {
+    "$set": {
+      "splatNetData.playedTime": new Date(splatNetData.playedTime),
+    },
+  });
 
-	console.log(`Updated ${splatNetData.playedTime} to ${new Date(splatNetData.playedTime)}`);
+  console.log(
+    `Updated ${splatNetData.playedTime} to ${new Date(
+      splatNetData.playedTime,
+    )}`,
+  );
 }
 
-console.log("Done!")
+console.log("Done!");

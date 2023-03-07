@@ -14,3 +14,4 @@ export { MultiProgressBar } from "https://deno.land/x/progress@v1.2.8/mod.ts";
 export { Mutex } from "https://deno.land/x/semaphore@v1.1.1/mod.ts";
 export type { DeepReadonly } from "https://deno.land/x/ts_essentials@v9.1.2/mod.ts";
 export * as MongoDB from "npm:mongodb";
+export * as splatNet3Types from "npm:splatnet3-types/splatnet3";

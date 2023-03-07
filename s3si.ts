@@ -14,6 +14,7 @@ const parseArgs = (args: string[]) => {
       "monitor": ["m"],
       "skipMode": ["s", "skip-mode"],
       "withSummary": "with-summary",
+      "withStages": "with-stages",
     },
   });
   return parsed;
@@ -34,6 +35,7 @@ Options:
     --skip-mode <mode>, -s       Skip mode (default: null)
                                  ("vs", "coop")
     --with-summary               Include summary in the output
+    --with-stages                Include stage records in the output
     --help                       Show this help message and exit`,
   );
   Deno.exit(0);

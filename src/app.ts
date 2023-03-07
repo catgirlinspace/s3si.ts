@@ -17,6 +17,7 @@ export type Opts = {
   noProgress: boolean;
   monitor: boolean;
   withSummary: boolean;
+  withStages: boolean;
   skipMode?: string;
   cache?: Cache;
   stateBackend?: StateBackend;
@@ -29,6 +30,7 @@ export const DEFAULT_OPTS: Opts = {
   noProgress: false,
   monitor: false,
   withSummary: false,
+  withStages: true,
   env: DEFAULT_ENV,
 };
 
@@ -309,6 +311,34 @@ export class App {
       if (errors.length > 0) {
         throw errors[0];
       }
+    }
+
+    const stageExporters = exporters.filter((e) => e.exportStages);
+    if (!this.opts.withStages || stageExporters.length === 0) {
+      this.env.logger.log("Skip exporting stages.");
+    } else {
+      const stageRecords = await splatnet.getStageRecords();
+
+      await Promise.all(
+        stageExporters.map((e) =>
+          showError(
+            this.env,
+            e.exportStages!(stageRecords.stageRecords.nodes),
+          ).then((result) => {
+            if (result.status === "success") {
+              this.env.logger.log(`Exported stages to ${result.url}`);
+            } else if (result.status === "skip") {
+              this.env.logger.log(`Skipped exporting stages to ${e.name}`);
+            } else {
+              const _never: never = result;
+            }
+          })
+            .catch((err) => {
+              errors.push(err);
+              this.env.logger.error(`\nFailed to export to ${e.name}:`, err);
+            })
+        ),
+      );
     }
   }
   async monitor() {
