@@ -5,6 +5,8 @@ import {
   ExportResult,
   Game,
   GameExporter,
+  Queries,
+  RespMap,
   Summary,
   VsHistoryDetail,
 } from "../types.ts";
@@ -109,5 +111,22 @@ export class MongoDBExporter implements GameExporter {
     return {
       status: "success",
     };
+  }
+
+  async exportStages(stages: RespMap[Queries.StageRecordQuery]["stageRecords"]["nodes"]): Promise<ExportResult> {
+
+    for (const stage of stages) {
+      await this.mongoDb.collection("stages").updateOne({
+        "stage.id": stage.id,
+      }, {
+        $set: stage,
+      }, {
+        upsert: true,
+      });
+    }
+
+    return {
+      status: "success",
+    }
   }
 }

@@ -70,7 +70,8 @@
   },
   "npm": {
     "specifiers": {
-      "mongodb": "mongodb@5.1.0"
+      "mongodb": "mongodb@5.1.0",
+      "splatnet3-types": "splatnet3-types@0.2.20230227204004"
     },
     "packages": {
       "@types/node@18.14.2": {
@@ -142,6 +143,10 @@
         "dependencies": {
           "memory-pager": "memory-pager@1.5.0"
         }
+      },
+      "splatnet3-types@0.2.20230227204004": {
+        "integrity": "sha512-FAY6pbUcrp5O8c49BNXSKxoyM3UlCrRx2AtA9Y3qlvqOLdHqwxtzcdzbk1b1hRam8ZcrxRzE/ii6ESRiPIAnZw==",
+        "dependencies": {}
       },
       "tr46@3.0.0": {
         "integrity": "sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==",
