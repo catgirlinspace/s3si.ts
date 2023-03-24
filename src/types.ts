@@ -3,18 +3,18 @@ import { RankState } from "./state.ts";
 
 export enum Queries {
   HomeQuery = "22e2fa8294168003c21b00c333c35384",
-  LatestBattleHistoriesQuery = "4f5f26e64bca394b45345a65a2f383bd",
-  RegularBattleHistoriesQuery = "d5b795d09e67ce153e622a184b7e7dfa",
-  BankaraBattleHistoriesQuery = "de4754588109b77dbcb90fbe44b612ee",
-  XBattleHistoriesQuery = "45c74fefb45a49073207229ca65f0a62",
-  PrivateBattleHistoriesQuery = "1d6ed57dc8b801863126ad4f351dfb9a",
+  LatestBattleHistoriesQuery = "0176a47218d830ee447e10af4a287b3f",
+  RegularBattleHistoriesQuery = "3baef04b095ad8975ea679d722bc17de",
+  BankaraBattleHistoriesQuery = "0438ea6978ae8bd77c5d1250f4f84803",
+  XBattleHistoriesQuery = "6796e3cd5dc3ebd51864dc709d899fc5",
+  PrivateBattleHistoriesQuery = "8e5ae78b194264a6c230e262d069bd28",
   VsHistoryDetailQuery = "291295ad311b99a6288fc95a5c4cb2d2",
-  CoopHistoryQuery = "6ed02537e4a65bbb5e7f4f23092f6154",
+  CoopHistoryQuery = "91b917becd2fa415890f5b47e15ffb15",
   CoopHistoryDetailQuery = "379f0d9b78b531be53044bcac031b34b",
   myOutfitCommonDataFilteringConditionQuery =
     "d02ab22c9dccc440076055c8baa0fa7a",
   myOutfitCommonDataEquipmentsQuery = "d29cd0c2b5e6bac90dd5b817914832f8",
-  HistoryRecordQuery = "32b6771f94083d8f04848109b7300af5",
+  HistoryRecordQuery = "f09da9d24d888797fdfb2f060dbdf4ed",
   ConfigureAnalyticsQuery = "f8ae00773cc412a50dd41a6d9a159ddd",
   StageRecordQuery = "f08a932d533845dde86e674e03bbb7d3",
 }
