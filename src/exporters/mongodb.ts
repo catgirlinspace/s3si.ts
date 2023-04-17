@@ -113,8 +113,9 @@ export class MongoDBExporter implements GameExporter {
     };
   }
 
-  async exportStages(stages: RespMap[Queries.StageRecordQuery]["stageRecords"]["nodes"]): Promise<ExportResult> {
-
+  async exportStages(
+    stages: RespMap[Queries.StageRecordQuery]["stageRecords"]["nodes"],
+  ): Promise<ExportResult> {
     for (const stage of stages) {
       await this.mongoDb.collection("stages").updateOne({
         "stage.id": stage.id,
@@ -127,6 +128,6 @@ export class MongoDBExporter implements GameExporter {
 
     return {
       status: "success",
-    }
+    };
   }
 }
