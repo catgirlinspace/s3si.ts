@@ -31,6 +31,7 @@ export type State = {
   fileExportPath: string;
   monitorInterval: number;
   mongoDbUri?: string;
+  splashcatApiKey?: string;
 };
 
 export const DEFAULT_STATE: State = {
