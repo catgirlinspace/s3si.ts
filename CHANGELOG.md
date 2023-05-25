@@ -1,3 +1,12 @@
+## 0.3.5
+
+fix: wrong ability keys in some languages
+
+## 0.3.4
+
+fix(gui): GUI ja translation about VS and Salmon Run
+([#68](https://github.com/spacemeowx2/s3si.ts/issues/68))
+
 ## 0.3.3
 
 feat: add eggstra work mode

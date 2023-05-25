@@ -15,7 +15,6 @@ import {
   GameExporter,
   Image,
   PlayerGear,
-  StatInkAbility,
   StatInkCoopPlayer,
   StatInkCoopPostBody,
   StatInkCoopWave,
@@ -42,6 +41,7 @@ import {
   urlSimplify,
 } from "../utils.ts";
 import { Env } from "../env.ts";
+import GEAR_MAP from "../assets/gear-map.json" assert { type: "json" };
 
 const COOP_POINT_MAP: Record<number, number | undefined> = {
   0: -20,
@@ -229,8 +229,7 @@ class StatInkAPI {
     );
   getWeapon = () =>
     this._getCached<StatInkWeapon>(`${this.statInk}/api/v3/weapon?full=1`);
-  getAbility = () =>
-    this._getCached<StatInkAbility>(`${this.statInk}/api/v3/ability?full=1`);
+  getAbility = () => GEAR_MAP;
   getStage = () =>
     this._getCached<StatInkStage>(`${this.statInk}/api/v3/stage`);
 }
