@@ -21,6 +21,7 @@ export enum Queries {
   myOutfitCommonDataEquipmentsQuery = "d29cd0c2b5e6bac90dd5b817914832f8",
   HistoryRecordQuery = "d9246baf077b2a29b5f7aac321810a77",
   ConfigureAnalyticsQuery = "f8ae00773cc412a50dd41a6d9a159ddd",
+  StageRecordQuery = "f08a932d533845dde86e674e03bbb7d3",
 }
 export const S3SI_LINK = "https://forgejo.catgirlin.space/catgirl/s3si.ts";
 
