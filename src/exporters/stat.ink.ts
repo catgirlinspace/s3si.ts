@@ -330,6 +330,8 @@ export class StatInkExporter implements GameExporter {
       }
     } else if (vsMode === "X_MATCH") {
       return "xmatch";
+    } else if (vsMode === "LEAGUE") {
+      return "event";
     }
 
     throw new TypeError(`Unknown vsMode ${vsMode}`);
@@ -421,6 +423,7 @@ export class StatInkExporter implements GameExporter {
       myTeam,
       otherTeams,
       bankaraMatch,
+      leagueMatch,
       festMatch,
       playedTime,
     } = vsDetail;
@@ -562,6 +565,10 @@ export class StatInkExporter implements GameExporter {
         result.rank_after = result.rank_before;
         result.rank_after_s_plus = result.rank_before_s_plus;
       }
+    }
+    if (leagueMatch) {
+      result.event = leagueMatch.leagueMatchEvent?.id;
+      result.event_power = leagueMatch.myLeaguePower;
     }
 
     if (challengeProgress) {

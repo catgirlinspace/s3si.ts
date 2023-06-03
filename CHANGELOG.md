@@ -1,3 +1,18 @@
+## 0.4.1
+
+feat: add support for Challenges
+([#72](https://github.com/spacemeowx2/s3si.ts/issues/72))
+
+## 0.4.0
+
+feat: update `callImink`
+
+feat: update VersionData
+
+## 0.3.6
+
+feat: update `WEB_VIEW_VERSION` and query hashes for 4.0.0
+
 ## 0.3.5
 
 fix: wrong ability keys in some languages

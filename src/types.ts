@@ -1,23 +1,8 @@
 import { splatNet3Types } from "../deps.ts";
 import { RankState } from "./state.ts";
+import { Queries } from "./constant.ts";
+export { Queries };
 
-export enum Queries {
-  HomeQuery = "22e2fa8294168003c21b00c333c35384",
-  LatestBattleHistoriesQuery = "0176a47218d830ee447e10af4a287b3f",
-  RegularBattleHistoriesQuery = "3baef04b095ad8975ea679d722bc17de",
-  BankaraBattleHistoriesQuery = "0438ea6978ae8bd77c5d1250f4f84803",
-  XBattleHistoriesQuery = "6796e3cd5dc3ebd51864dc709d899fc5",
-  PrivateBattleHistoriesQuery = "8e5ae78b194264a6c230e262d069bd28",
-  VsHistoryDetailQuery = "291295ad311b99a6288fc95a5c4cb2d2",
-  CoopHistoryQuery = "91b917becd2fa415890f5b47e15ffb15",
-  CoopHistoryDetailQuery = "379f0d9b78b531be53044bcac031b34b",
-  myOutfitCommonDataFilteringConditionQuery =
-    "d02ab22c9dccc440076055c8baa0fa7a",
-  myOutfitCommonDataEquipmentsQuery = "d29cd0c2b5e6bac90dd5b817914832f8",
-  HistoryRecordQuery = "f09da9d24d888797fdfb2f060dbdf4ed",
-  ConfigureAnalyticsQuery = "f8ae00773cc412a50dd41a6d9a159ddd",
-  StageRecordQuery = "f08a932d533845dde86e674e03bbb7d3",
-}
 export type VarsMap = {
   [Queries.HomeQuery]: [];
   [Queries.LatestBattleHistoriesQuery]: [];
@@ -221,7 +206,13 @@ export type CoopInfo = {
   };
 };
 export type Game = VsInfo | CoopInfo;
-export type VsMode = "REGULAR" | "BANKARA" | "PRIVATE" | "FEST" | "X_MATCH";
+export type VsMode =
+  | "REGULAR"
+  | "BANKARA"
+  | "PRIVATE"
+  | "FEST"
+  | "X_MATCH"
+  | "LEAGUE";
 export type VsHistoryDetail = {
   id: string;
   vsRule: {
@@ -251,6 +242,13 @@ export type VsHistoryDetail = {
     dragonMatchType: "NORMAL" | "DECUPLE" | "DRAGON" | "DOUBLE_DRAGON";
     contribution: number;
     myFestPower: number | null;
+  } | null;
+  leagueMatch: {
+    leagueMatchEvent: {
+      "name": string;
+      "id": string;
+    } | null;
+    myLeaguePower: number | null;
   } | null;
 
   myTeam: VsTeam;
@@ -770,12 +768,13 @@ export type StatInkPostBody = {
     | "xmatch"
     | "splatfest_challenge"
     | "splatfest_open"
-    | "private";
+    | "private"
+    | "event";
   rule: "nawabari" | "area" | "hoko" | "yagura" | "asari" | "tricolor";
   stage: string;
   weapon: string;
   result: "win" | "lose" | "draw" | "exempted_lose";
-  knockout?: "yes" | "no"; // for TW, set null or not sending
+  knockout?: "yes" | "no" | null; // for TW, set null or not sending
   rank_in_team: number; // position in scoreboard
   kill?: number;
   assist?: number;
@@ -827,6 +826,8 @@ export type StatInkPostBody = {
   clout_before?: number; // Splatfest Clout, before the battle
   clout_after?: number; // Splatfest Clout, after the battle
   clout_change?: number; // Splatfest Clout, equals to clout_after - clout_before if you know them
+  event?: string;
+  event_power?: number | null;
   cash_before?: number;
   cash_after?: number;
   our_team_players: StatInkPlayer[];
