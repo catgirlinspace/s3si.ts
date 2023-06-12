@@ -10,6 +10,7 @@ import { delay, showError } from "./utils.ts";
 import { GameFetcher } from "./GameFetcher.ts";
 import { DEFAULT_ENV, Env } from "./env.ts";
 import { MongoDBExporter } from "./exporters/mongodb.ts";
+import { SplashcatExporter } from "./exporters/splashcat.ts";
 
 export type Opts = {
   profilePath: string;
@@ -135,6 +136,14 @@ export class App {
       out.push(
         new MongoDBExporter(this.profile.state.mongoDbUri!),
       );
+    }
+
+    if (exporters.includes("splashcat")) {
+      out.push(new SplashcatExporter({
+        env: this.env,
+        uploadMode: this.opts.monitor ? "Monitoring" : "Manual",
+        splashcatApiKey: this.profile.state.splashcatApiKey!,
+      }));
     }
 
     return out;

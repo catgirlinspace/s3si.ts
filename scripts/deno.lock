@@ -87,7 +87,7 @@
   },
   "npm": {
     "specifiers": {
-      "mongodb": "mongodb@5.1.0",
+      "mongodb": "mongodb@5.5.0",
       "splatnet3-types": "splatnet3-types@0.2.20230227204004"
     },
     "packages": {
@@ -110,6 +110,10 @@
         "integrity": "sha512-y09gBGusgHtinMon/GVbv1J6FrXhnr/+6hqLlSmEFzkz6PodqF6TxjyvfvY3AfO+oG1mgUtbC86xSbOlwvM62Q==",
         "dependencies": {}
       },
+      "bson@5.3.0": {
+        "integrity": "sha512-ukmCZMneMlaC5ebPHXIkP8YJzNl5DC41N5MAIvKDqLggdao342t4McltoJBQfQya/nHBWAcSsYRqlXPoQkTJag==",
+        "dependencies": {}
+      },
       "ip@2.0.0": {
         "integrity": "sha512-WKa+XuLG1A1R0UWhl2+1XQSi+fZWMsYKffMZTTYsiZaUD8k2yDAj5atimTUD2TZkyCkNEeYE5NhFZmupOGtjYQ==",
         "dependencies": {}
@@ -129,6 +133,15 @@
         "integrity": "sha512-qgKb7y+EI90y4weY3z5+lIgm8wmexbonz0GalHkSElQXVKtRuwqXuhXKccyvIjXCJVy9qPV82zsinY0W1FBnJw==",
         "dependencies": {
           "bson": "bson@5.0.1",
+          "mongodb-connection-string-url": "mongodb-connection-string-url@2.6.0",
+          "saslprep": "saslprep@1.0.3",
+          "socks": "socks@2.7.1"
+        }
+      },
+      "mongodb@5.5.0": {
+        "integrity": "sha512-XgrkUgAAdfnZKQfk5AsYL8j7O99WHd4YXPxYxnh8dZxD+ekYWFRA3JktUsBnfg+455Smf75/+asoU/YLwNGoQQ==",
+        "dependencies": {
+          "bson": "bson@5.3.0",
           "mongodb-connection-string-url": "mongodb-connection-string-url@2.6.0",
           "saslprep": "saslprep@1.0.3",
           "socks": "socks@2.7.1"
