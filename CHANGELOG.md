@@ -1,3 +1,16 @@
+## 0.4.4
+
+feat: send Anarchy (Open) Power
+
+## 0.4.3
+
+feat: add `list-method` option
+([#73](https://github.com/spacemeowx2/s3si.ts/issues/73))
+
+## 0.4.2
+
+fix: `coral_user_id` is string
+
 ## 0.4.1
 
 feat: add support for Challenges

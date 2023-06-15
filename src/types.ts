@@ -9,6 +9,7 @@ export type VarsMap = {
   [Queries.RegularBattleHistoriesQuery]: [];
   [Queries.BankaraBattleHistoriesQuery]: [];
   [Queries.XBattleHistoriesQuery]: [];
+  [Queries.EventBattleHistoriesQuery]: [];
   [Queries.PrivateBattleHistoriesQuery]: [];
   [Queries.VsHistoryDetailQuery]: [{
     vsResultId: string;
@@ -244,6 +245,9 @@ export type VsHistoryDetail = {
   bankaraMatch: {
     earnedUdemaePoint: null | number;
     mode: "OPEN" | "CHALLENGE";
+    bankaraPower?: null | {
+      power?: null | number;
+    };
   } | null;
   festMatch: {
     dragonMatchType: "NORMAL" | "DECUPLE" | "DRAGON" | "DOUBLE_DRAGON";
@@ -427,6 +431,11 @@ export type RespMap = {
   };
   [Queries.BankaraBattleHistoriesQuery]: BankaraBattleHistories;
   [Queries.XBattleHistoriesQuery]: XBattleHistories;
+  [Queries.EventBattleHistoriesQuery]: {
+    eventBattleHistories: {
+      historyGroups: HistoryGroups<BattleListNode>;
+    };
+  };
   [Queries.PrivateBattleHistoriesQuery]: {
     privateBattleHistories: {
       historyGroups: HistoryGroups<BattleListNode>;
@@ -614,9 +623,13 @@ export enum BattleListType {
   Latest,
   Regular,
   Bankara,
+  Event,
+  XBattle,
   Private,
   Coop,
 }
+
+export type ListMethod = "latest" | "all" | "auto";
 
 export type StatInkUuidList = {
   status: number;
@@ -822,6 +835,8 @@ export type StatInkPostBody = {
   challenge_lose?: number;
   x_power_before?: number | null;
   x_power_after?: number | null;
+  bankara_power_before?: number | null;
+  bankara_power_after?: number | null;
   fest_power?: number; // Splatfest Power (Pro)
   fest_dragon?:
     | "10x"

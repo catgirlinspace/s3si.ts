@@ -4,7 +4,7 @@ import { flags } from "./deps.ts";
 
 const parseArgs = (args: string[]) => {
   const parsed = flags.parse(args, {
-    string: ["profilePath", "exporter", "skipMode"],
+    string: ["profilePath", "exporter", "skipMode", "listMethod"],
     boolean: ["help", "noProgress", "monitor", "withSummary"],
     alias: {
       "help": "h",
@@ -15,6 +15,7 @@ const parseArgs = (args: string[]) => {
       "skipMode": ["s", "skip-mode"],
       "withSummary": "with-summary",
       "withStages": "with-stages",
+      "listMethod": "list-method",
     },
   });
   return parsed;
@@ -30,6 +31,10 @@ Options:
     --exporter <exporter>, -e    Exporter list to use (default: stat.ink)
                                  Multiple exporters can be separated by commas
                                  (e.g. "stat.ink,file,mongodb")
+    --list-method                When set to "latest", the latest 50 matches will be obtained.
+                                 When set to "all", matches of all modes will be obtained with a maximum of 250 matches (5 modes x 50 matches).
+                                 When set to "auto", the latest 50 matches will be obtained. If 50 matches have not been uploaded yet, matches will be obtained from the list of all modes.
+                                 "auto" is the default setting.
     --no-progress, -n            Disable progress bar
     --monitor, -m                Monitor mode
     --skip-mode <mode>, -s       Skip mode (default: null)
