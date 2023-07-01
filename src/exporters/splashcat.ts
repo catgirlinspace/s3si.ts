@@ -121,10 +121,16 @@ export class SplashcatExporter implements GameExporter {
       }
     }
   }
-  static getGameId(id: string) { // very similar to the file exporter
+  static getGameIdOld(id: string) { // very similar to the file exporter
     const { uid, timestamp } = parseHistoryDetailId(id);
 
     return `${uid}_${timestamp}Z`;
+  }
+
+  static getGameId(id: string) {
+    const plainText = new TextDecoder().decode(base64.decode(id));
+
+    return plainText.split(':').at(-1);
   }
   async notExported(
     { type, list }: { list: string[]; type: Game["type"] },
@@ -135,10 +141,11 @@ export class SplashcatExporter implements GameExporter {
     const out: string[] = [];
 
     for (const id of list) {
+      const oldGameId = SplashcatExporter.getGameIdOld(id);
       const gameId = SplashcatExporter.getGameId(id);
 
       if (
-        !uuid.includes(gameId)
+        !uuid.includes(oldGameId) && !uuid.includes(gameId)
       ) {
         out.push(id);
       }
@@ -160,7 +167,7 @@ export class SplashcatExporter implements GameExporter {
       isMe: player.isMyself,
       name: player.name,
       nameId: player.nameId ?? "",
-      nplnId: player.id.substring(0,50), // NOT CORRECT, FIX LATER
+      nplnId: new TextDecoder().decode(base64.decode(player.id)).split(":").at(-1), // NOT CORRECT, FIX LATER
       paint: player.paint,
       species: player.species,
       weaponId: Number(new TextDecoder().decode(base64.decode(player.weapon.id)).split("-")[1]),
