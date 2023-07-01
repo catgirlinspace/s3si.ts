@@ -167,7 +167,7 @@ export class SplashcatExporter implements GameExporter {
       isMe: player.isMyself,
       name: player.name,
       nameId: player.nameId ?? "",
-      nplnId: new TextDecoder().decode(base64.decode(player.id)).split(":").at(-1), // NOT CORRECT, FIX LATER
+      nplnId: new TextDecoder().decode(base64.decode(player.id)).split(":").at(-1),
       paint: player.paint,
       species: player.species,
       weaponId: Number(new TextDecoder().decode(base64.decode(player.weapon.id)).split("-")[1]),
