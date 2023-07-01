@@ -33,7 +33,7 @@ export const DEFAULT_OPTS: Opts = {
   monitor: false,
   withSummary: false,
   withStages: true,
-  listMethod: "latest",
+  listMethod: "auto",
   env: DEFAULT_ENV,
 };
 

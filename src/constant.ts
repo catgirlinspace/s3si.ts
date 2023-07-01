@@ -2,7 +2,7 @@ import type { StatInkPostBody, VsHistoryDetail } from "./types.ts";
 
 export const AGENT_NAME = "splashcat / s3si.ts";
 export const AGENT_VERSION = "1.1.1";
-export const S3SI_VERSION = "0.4.4";
+export const S3SI_VERSION = "0.4.5";
 export const COMBINED_VERSION = `${AGENT_VERSION}/${S3SI_VERSION}`;
 export const NSOAPP_VERSION = "2.5.2";
 export const WEB_VIEW_VERSION = "4.0.0-d5178440";
