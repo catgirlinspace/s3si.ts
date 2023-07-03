@@ -163,7 +163,7 @@ export class SplashcatExporter implements GameExporter {
       clothingGear: this.mapGear(player.clothingGear),
       headGear: this.mapGear(player.headGear),
       shoesGear: this.mapGear(player.shoesGear),
-      disconnected: player.result === undefined,
+      disconnected: player.result ? false : true,
       isMe: player.isMyself,
       name: player.name,
       nameId: player.nameId ?? "",
