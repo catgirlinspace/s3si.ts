@@ -163,7 +163,7 @@ export class SplashcatExporter implements GameExporter {
       clothingGear: this.mapGear(player.clothingGear),
       headGear: this.mapGear(player.headGear),
       shoesGear: this.mapGear(player.shoesGear),
-      disconnected: player.result !== undefined,
+      disconnected: player.result === undefined,
       isMe: player.isMyself,
       name: player.name,
       nameId: player.nameId ?? "",
@@ -226,6 +226,7 @@ export class SplashcatExporter implements GameExporter {
       anarchy: vsDetail.vsMode.mode === "BANKARA" ? {
         mode: anarchyMode,
         pointChange: vsDetail.bankaraMatch?.earnedUdemaePoint ?? undefined,
+        power: vsDetail.bankaraMatch?.bankaraPower ?? undefined,
       } : undefined,
       knockout: vsDetail.knockout ?? undefined,
       splatfest: vsDetail.vsMode.mode === "FEST" ? {
@@ -233,7 +234,7 @@ export class SplashcatExporter implements GameExporter {
         power: vsDetail.festMatch?.myFestPower ?? undefined,
       } : undefined,
       xBattle: vsDetail.vsMode.mode === "X_MATCH" ? {
-        power: vsDetail.xMatch?.lastXPower ?? undefined,
+        xPower: vsDetail.xMatch?.lastXPower ?? undefined,
       } : undefined,
       teams: [],
       awards: vsDetail.awards.map((i) => i.name),
