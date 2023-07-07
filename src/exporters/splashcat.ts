@@ -226,7 +226,7 @@ export class SplashcatExporter implements GameExporter {
       anarchy: vsDetail.vsMode.mode === "BANKARA" ? {
         mode: anarchyMode,
         pointChange: vsDetail.bankaraMatch?.earnedUdemaePoint ?? undefined,
-        power: vsDetail.bankaraMatch?.bankaraPower ?? undefined,
+        power: vsDetail.bankaraMatch?.bankaraPower?.power ?? undefined,
       } : undefined,
       knockout: vsDetail.knockout ?? undefined,
       splatfest: vsDetail.vsMode.mode === "FEST" ? {
