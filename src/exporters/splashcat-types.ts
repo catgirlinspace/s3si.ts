@@ -1,6 +1,6 @@
 /**
  * A battle to be uploaded to Splashcat. Any SplatNet 3 strings should use en-US locale.
- * Splashcat will translate strings into the user's langauge.
+ * Splashcat will translate strings into the user's language.
  */
 export interface SplashcatBattle {
     anarchy?: Anarchy;
@@ -9,6 +9,7 @@ export interface SplashcatBattle {
      * and manage the award's rank.
      */
     awards:     string[];
+    challenge?: Challenge;
     duration:   number;
     judgement:  SplashcatBattleJudgement;
     knockout?:  Knockout;
@@ -29,10 +30,20 @@ export interface SplashcatBattle {
 export interface Anarchy {
     mode?:        AnarchyMode;
     pointChange?: number;
+    power?:       number;
     [property: string]: any;
 }
 
 export type AnarchyMode = "SERIES" | "OPEN";
+
+export interface Challenge {
+    /**
+     * base64 decoded and split by `-` to get the last section
+     */
+    id?:    string;
+    power?: number;
+    [property: string]: any;
+}
 
 export type SplashcatBattleJudgement = "WIN" | "LOSE" | "DRAW" | "EXEMPTED_LOSE" | "DEEMED_LOSE";
 
@@ -56,7 +67,7 @@ export interface Team {
     festUniformBonusRate?: number;
     festUniformName?:      string;
     isMyTeam:              boolean;
-    judgement:             TeamJudgement;
+    judgement?:            TeamJudgement;
     noroshi?:              number;
     order:                 number;
     paintRatio?:           number;
@@ -81,12 +92,15 @@ export interface Player {
     /**
      * Array of badge IDs. Use JSON `null` for empty slots.
      */
-    badges:                Array<number | null>;
-    clothingGear:          Gear;
-    deaths?:               number;
-    disconnected:          boolean;
-    headGear:              Gear;
-    isMe:                  boolean;
+    badges:       Array<number | null>;
+    clothingGear: Gear;
+    deaths?:      number;
+    disconnected: boolean;
+    headGear:     Gear;
+    isMe:         boolean;
+    /**
+     * Should report the same way that SplatNet 3 does (kills + assists)
+     */
     kills?:                number;
     name:                  string;
     nameId:                string;

@@ -236,6 +236,10 @@ export class SplashcatExporter implements GameExporter {
       xBattle: vsDetail.vsMode.mode === "X_MATCH" ? {
         xPower: vsDetail.xMatch?.lastXPower ?? undefined,
       } : undefined,
+      challenge: vsDetail.vsMode.mode === "LEAGUE" ? {
+        id: new TextDecoder().decode(base64.decode(vsDetail.leagueMatch?.leagueMatchEvent?.id!)).split("-")[1],
+        power: vsDetail.leagueMatch?.myLeaguePower ?? undefined,
+      } : undefined,
       teams: [],
       awards: vsDetail.awards.map((i) => i.name),
     };
