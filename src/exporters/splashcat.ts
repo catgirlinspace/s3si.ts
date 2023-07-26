@@ -215,6 +215,9 @@ export class SplashcatExporter implements GameExporter {
       anarchyMode = vsDetail.bankaraMatch.mode === "OPEN" ? "OPEN" : "SERIES"
     }
 
+    const rank = rankState?.rank.substring(0, 2) ?? undefined;
+    const sPlusNumber = rankState?.rank.substring(2) ?? undefined;
+
     const result: SplashcatBattle = {
       splatnetId: await SplashcatExporter.getGameId(vsDetail.id),
       duration: vsDetail.duration,
@@ -227,6 +230,9 @@ export class SplashcatExporter implements GameExporter {
         mode: anarchyMode,
         pointChange: vsDetail.bankaraMatch?.earnedUdemaePoint ?? undefined,
         power: vsDetail.bankaraMatch?.bankaraPower?.power ?? undefined,
+        points: rankState?.rankPoint ?? undefined,
+        rank,
+        sPlusNumber: sPlusNumber ? Number(sPlusNumber) : undefined,
       } : undefined,
       knockout: vsDetail.knockout ?? undefined,
       splatfest: vsDetail.vsMode.mode === "FEST" ? {

@@ -30,11 +30,16 @@ export interface SplashcatBattle {
 export interface Anarchy {
     mode?:        AnarchyMode;
     pointChange?: number;
+    points?:      number;
     power?:       number;
+    rank?:        Rank;
+    sPlusNumber?: number;
     [property: string]: any;
 }
 
 export type AnarchyMode = "SERIES" | "OPEN";
+
+export type Rank = "C-" | "C" | "C+" | "B-" | "B" | "B+" | "A-" | "A" | "A+" | "S" | "S+";
 
 export interface Challenge {
     /**
@@ -103,7 +108,7 @@ export interface Player {
      */
     kills?:                number;
     name:                  string;
-    nameId:                string;
+    nameId?:               string;
     noroshiTry?:           number;
     nplnId:                string;
     paint:                 number;
