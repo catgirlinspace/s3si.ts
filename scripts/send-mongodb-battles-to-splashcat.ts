@@ -1,6 +1,7 @@
 import { MongoDB } from "../deps.ts";
 import { DEFAULT_ENV } from "../src/env.ts";
 import { MongoDBExporter } from "../src/exporters/mongodb.ts";
+import { SplashcatExporter } from "../src/exporters/splashcat.ts";
 import { FileStateBackend, Profile } from "../src/state.ts";
 
 const env = DEFAULT_ENV;
@@ -12,6 +13,12 @@ if (!profile.state.mongoDbUri) {
   console.error("MongoDB URI not set");
   Deno.exit(1);
 }
+
+const splashcatClient = new SplashcatExporter({
+  env,
+  splashcatApiKey: profile.state.splashcatApiKey!,
+  uploadMode: "manual",
+});
 
 const mongoDbClient = new MongoDB.MongoClient(profile.state.mongoDbUri);
 const battlesCollection = mongoDbClient.db("splashcat").collection("battles");
@@ -27,31 +34,29 @@ let count = 0;
 const erroredBattles = [];
 
 for await (const doc of cursor) {
-  const { splatNetData, _id } = doc;
+  const { data, splatNetData, _id } = doc;
 
   // start time for performance tracking, needs to be very accurate
   const startTime = new Date();
 
-  splatNetData.playedTime = splatNetData.playedTime.toISOString();
-
-  const response = await fetch("http://127.0.0.1:8000/battles/api/upload/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${profile.state.splashcatApiKey}`,
-    },
-    body: JSON.stringify({
-      "data_type": "splatnet3",
-      "battle": splatNetData,
-    })
-  })
-
-  if (!response.ok) {
-    console.error(`Failed to upload ${splatNetData.id}`);
-    erroredBattles.push({
-      id: doc.gameId,
-      error: await response.text(),
-    });
+  try {
+    if (data) {
+      await splashcatClient.exportGame(data);
+    } else {
+      await splashcatClient.exportGame({
+        type: "VsInfo",
+        detail: splatNetData,
+        bankaraMatchChallenge: null,
+        challengeProgress: null,
+        groupInfo: null,
+        listNode: null,
+        rankBeforeState: null,
+        rankState: null,
+      });
+    }
+  } catch (e) {
+    console.log("Failed to export game", e);
+    erroredBattles.push(e.toString());
   }
 
   // end time for performance tracking, needs to be very accurate
