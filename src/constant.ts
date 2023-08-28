@@ -2,10 +2,10 @@ import type { StatInkPostBody, VsHistoryDetail } from "./types.ts";
 
 export const AGENT_NAME = "splashcat / s3si.ts";
 export const AGENT_VERSION = "1.1.1";
-export const S3SI_VERSION = "0.4.6";
+export const S3SI_VERSION = "0.4.7";
 export const COMBINED_VERSION = `${AGENT_VERSION}/${S3SI_VERSION}`;
-export const NSOAPP_VERSION = "2.6.0";
-export const WEB_VIEW_VERSION = "4.0.0-22ddb0fd";
+export const NSOAPP_VERSION = "2.7.0";
+export const WEB_VIEW_VERSION = "4.0.0-b8c1e0fc";
 export enum Queries {
   HomeQuery = "7dcc64ea27a08e70919893a0d3f70871",
   LatestBattleHistoriesQuery = "0d90c7576f1916469b2ae69f64292c02",
