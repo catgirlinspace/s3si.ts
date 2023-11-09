@@ -148,6 +148,7 @@ export type VsPlayer = {
   } | null;
   paint: number;
   crown: boolean;
+  festDragonCert: "NONE" | "DRAGON" | "DOUBLE_DRAGON";
 
   headGear: PlayerGear;
   clothingGear: PlayerGear;
@@ -279,6 +280,8 @@ export type CoopHistoryPlayerResult = {
       name: string;
       id: string;
     };
+    isMyself: boolean;
+    species: "INKLING" | "OCTOLING";
   };
   weapons: { name: string; image: Image | null }[];
   specialWeapon: null | {
@@ -650,7 +653,7 @@ export type StatInkWeapon = {
 }[];
 
 export type StatInkGear = {
-  primary_ability: string;
+  primary_ability: string | null;
   secondary_abilities: (string | null)[];
 };
 
@@ -676,7 +679,9 @@ export type StatInkPlayer = {
   special?: number;
   gears?: StatInkGears;
   crown?: "yes" | "no";
+  crown_type?: "x" | "100x" | "333x";
   disconnected: "yes" | "no";
+  species: "inkling" | "octoling";
 };
 
 export type StatInkStage = {
@@ -726,6 +731,7 @@ export type StatInkCoopPlayer = {
   rescued: number;
   defeat_boss: number;
   disconnected: "yes" | "no";
+  species: "inkling" | "octoling";
 };
 
 export type StatInkCoopBoss = {

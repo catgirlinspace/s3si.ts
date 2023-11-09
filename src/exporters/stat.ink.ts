@@ -366,7 +366,7 @@ export class StatInkExporter implements GameExporter {
       { primaryGearPower, additionalGearPowers }: PlayerGear,
     ): StatInkGear => {
       const primary = mapAbility(primaryGearPower);
-      if (!primary) {
+      if (!primary && !this.isRandom(primaryGearPower.image)) {
         throw new Error("Unknown ability: " + primaryGearPower.name);
       }
       return {
@@ -394,6 +394,8 @@ export class StatInkExporter implements GameExporter {
       inked: player.paint,
       gears: await this.mapGears(player),
       crown: player.crown ? "yes" : "no",
+      crown_type: undefined,
+      species: player.species === "INKLING" ? "inkling" : "octoling",
       disconnected: player.result ? "no" : "yes",
     };
     if (player.result) {
@@ -403,6 +405,13 @@ export class StatInkExporter implements GameExporter {
       result.death = player.result.death;
       result.signal = player.result.noroshiTry ?? undefined;
       result.special = player.result.special;
+    }
+    if (player.crown) {
+      result.crown_type = "x";
+    } else if (player.festDragonCert === "DRAGON") {
+      result.crown_type = "100x";
+    } else if (player.festDragonCert === "DOUBLE_DRAGON") {
+      result.crown_type = "333x";
     }
     return result;
   };
@@ -621,16 +630,18 @@ export class StatInkExporter implements GameExporter {
   }
   isRandom(image: Image | null): boolean {
     // question mark
-    const RANDOM_FILENAME =
-      "473fffb2442075078d8bb7125744905abdeae651b6a5b7453ae295582e45f7d1";
+    const RANDOM_FILENAME = [
+      "473fffb2442075078d8bb7125744905abdeae651b6a5b7453ae295582e45f7d1",
+      "dc937b59892604f5a86ac96936cd7ff09e25f18ae6b758e8014a24c7fa039e91",
+    ];
     // file exporter will replace url to { pathname: string } | string
     const url = image?.url as ReturnType<typeof urlSimplify> | undefined | null;
     if (typeof url === "string") {
-      return url.includes(RANDOM_FILENAME);
+      return RANDOM_FILENAME.some((i) => url.includes(i));
     } else if (url === undefined || url === null) {
       return false;
     } else {
-      return url.pathname.includes(RANDOM_FILENAME);
+      return RANDOM_FILENAME.some((i) => url.pathname.includes(i));
     }
   }
   async mapCoopWeapon(
@@ -700,6 +711,7 @@ export class StatInkExporter implements GameExporter {
       rescued: rescuedCount,
       defeat_boss: defeatEnemyCount,
       disconnected: disconnected ? "yes" : "no",
+      species: player.species === "INKLING" ? "inkling" : "octoling",
     };
   }
   mapKing(id?: string) {
