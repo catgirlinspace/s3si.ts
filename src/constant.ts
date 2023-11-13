@@ -4,7 +4,7 @@ export const AGENT_NAME = "splashcat / s3si.ts";
 export const AGENT_VERSION = "1.1.1";
 export const S3SI_VERSION = "0.4.10";
 export const COMBINED_VERSION = `${AGENT_VERSION}/${S3SI_VERSION}`;
-export const NSOAPP_VERSION = "2.7.0";
+export const NSOAPP_VERSION = "2.7.1";
 export const WEB_VIEW_VERSION = "4.0.0-dae4328c";
 export enum Queries {
   HomeQuery =
