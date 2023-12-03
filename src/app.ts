@@ -28,7 +28,7 @@ export type Opts = {
 
 export const DEFAULT_OPTS: Opts = {
   profilePath: "./profile.json",
-  exporter: "stat.ink",
+  exporter: "stat.ink,splashcat",
   noProgress: false,
   monitor: false,
   withSummary: false,
