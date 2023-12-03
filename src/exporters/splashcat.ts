@@ -8,8 +8,6 @@ import {
   GameExporter,
   Nameplate,
   PlayerGear,
-  StatInkPostBody,
-  VsHistoryDetail,
   VsInfo,
   VsPlayer,
 VsTeam,
@@ -17,8 +15,6 @@ VsTeam,
 import { base64, msgpack, Mutex } from "../../deps.ts";
 import { APIError } from "../APIError.ts";
 import {
-  b64Number,
-  gameId,
   parseHistoryDetailId,
 } from "../utils.ts";
 import { Env } from "../env.ts";
@@ -61,13 +57,7 @@ class SplashcatAPI {
       body: msgpack.encode(body),
     });
 
-    const json: unknown = {}//await resp.json().catch(() => ({}));
-
-    console.log(json)
-
-    // read the body again as text
-    const text = await resp.text();
-    console.log(text);
+    const json = await resp.json();
 
     if (resp.status !== 200 && resp.status !== 201) {
       throw new APIError({
@@ -117,7 +107,7 @@ export class SplashcatExporter implements GameExporter {
     } else {
       return {
         status: "skip",
-        reason: "Splashcat API does not support Salmon Run",
+        reason: "Splashcat does not support Salmon Run",
       }
     }
   }
