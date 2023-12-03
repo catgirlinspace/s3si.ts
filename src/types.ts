@@ -785,6 +785,7 @@ export type StatInkCoopPostBody = {
 };
 
 export type StatInkPostBody = {
+  link_url?: string;
   test?: "yes" | "no";
   uuid: string;
   lobby:
