@@ -244,6 +244,19 @@ export class App {
     }
 
     if (exporters.includes("splashcat")) {
+      if (!state.splashcatApiKey) {
+        const key = (await this.env.prompts.prompt(
+          "Splashcat API key is not set. Please enter below.",
+        )).trim();
+        if (!key) {
+          this.env.logger.error("API key is required.");
+          Deno.exit(1);
+        }
+        await this.profile.writeState({
+          ...state,
+          splashcatApiKey: key,
+        });
+      }
       out.push(new SplashcatExporter({
         env: this.env,
         uploadMode: this.opts.monitor ? "Monitoring" : "Manual",
