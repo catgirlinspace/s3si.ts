@@ -2,9 +2,9 @@ import type { StatInkPostBody, VsHistoryDetail } from "./types.ts";
 
 export const AGENT_NAME = "splashcat / s3si.ts";
 export const AGENT_VERSION = "1.1.1";
-export const S3SI_VERSION = "0.4.11";
+export const S3SI_VERSION = "0.4.12";
 export const COMBINED_VERSION = `${AGENT_VERSION}/${S3SI_VERSION}`;
-export const NSOAPP_VERSION = "2.7.1";
+export const NSOAPP_VERSION = "2.8.0";
 export const WEB_VIEW_VERSION = "6.0.0-e135295b";
 export enum Queries {
   HomeQuery =
@@ -109,6 +109,10 @@ export const SPLATNET3_STATINK_MAP: {
       "sameride",
     "380e541b5bc5e49d77ff1a616f1343aeba01d500fee36aaddf8f09d74bd3d3bc":
       "tripletornado",
+    "8a7ee88a06407f4be1595ef8af4d2d2ac22bbf213a622cd19bbfaf4d0f36bcd7":
+      "teioika",
+    "a75eac34675bc0d4bd9ca9977cf22472848f89e28e08ee986b4461a3f2af28fc":
+      "ultra_chakuchi",
   },
   WATER_LEVEL_MAP: {
     0: "low",
