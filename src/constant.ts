@@ -1,9 +1,9 @@
 import type { StatInkPostBody, VsHistoryDetail } from "./types.ts";
 
 export const AGENT_NAME = "s3si.ts";
-export const S3SI_VERSION = "0.4.12";
-export const NSOAPP_VERSION = "2.8.1";
-export const WEB_VIEW_VERSION = "6.0.0-daea5c11";
+export const S3SI_VERSION = "0.4.15";
+export const NSOAPP_VERSION = "2.9.0";
+export const WEB_VIEW_VERSION = "6.0.0-eb33aadc";
 export enum Queries {
   HomeQuery =
     "51fc56bbf006caf37728914aa8bc0e2c86a80cf195b4d4027d6822a3623098a8",
@@ -38,9 +38,9 @@ export const S3SI_LINK = "https://github.com/spacemeowx2/s3si.ts";
 
 export const USERAGENT = `${AGENT_NAME}/${S3SI_VERSION} (${S3SI_LINK})`;
 export const DEFAULT_APP_USER_AGENT =
-  "Mozilla/5.0 (Linux; Android 11; Pixel 5) " +
+  "Mozilla/5.0 (Linux; Android 14; Pixel 7a) " +
   "AppleWebKit/537.36 (KHTML, like Gecko) " +
-  "Chrome/94.0.4606.61 Mobile Safari/537.36";
+  "Chrome/120.0.6099.230 Mobile Safari/537.36";
 export const SPLATNET3_URL = "https://api.lp1.av5ja.srv.nintendo.net";
 export const SPLATNET3_ENDPOINT =
   "https://api.lp1.av5ja.srv.nintendo.net/api/graphql";

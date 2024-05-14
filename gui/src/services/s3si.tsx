@@ -9,6 +9,7 @@ const client = new JSONRPCClient<S3SIService>({
 const LOG_SUB = new Set<(logs: Log[]) => void>();
 
 async function getLogs() {
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const r = await client.getLogs()
 
@@ -57,7 +58,7 @@ export const useLog = () => {
   return useContext(LOG_CONTEXT);
 }
 
-function renderMsg(i: any) {
+function renderMsg(i: unknown) {
   if (i instanceof Error) {
     return i.message
   }
@@ -91,14 +92,15 @@ export const LogProvider: React.FC<{ limit?: number, children?: React.ReactNode 
       LOG_SUB.delete(cb);
     }
   }, [limit])
+  const value = useMemo(() => {
+    const renderedLogs = logs.map(renderLog)
+    return {
+      logs,
+      renderedLogs,
+    }
+  }, [logs])
 
-
-  const renderedLogs = useMemo(() => logs.map(renderLog), [logs])
-
-  return <LOG_CONTEXT.Provider value={{
-    logs,
-    renderedLogs,
-  }}>
+  return <LOG_CONTEXT.Provider value={value}>
     {children}
   </LOG_CONTEXT.Provider>
 }
